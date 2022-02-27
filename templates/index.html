@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Type 2 Groceries</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js')}}"></script>
+    </head>
+    <body>
+        <div>
+            <img src="https://raw.githubusercontent.com/MariyaSha/groceriesList/main/logo_black.png" alt="grocery shopping list">
+        </div>
+        <div>
+            <p>All vegetables suggested and provided as options are non-starchy and have been proven to help individuals with type 2 diabetes to effectively manage their suger level and weight.</p>
+        </div>
+        <!-- Form for removing items from list -->
+        <div id="remove_items">
+            <form action="/remove_items" method="POST">
+                {% for item in shopping_items %}
+                <input type="checkbox" name="check" id="{{item}}" value={{item}} onchange="check_me('{{ item }}')">
+                <label for="{{item}}" name={{item}}>{{ item }}</label>
+                <br>
+                {% endfor %}
+                <input type="submit" value="CHECK ITEMS" id="remove_btn">
+            </form>
+        </div>
+
+        <!-- Form for adding items to list -->
+        <div id="add_item">
+            <form action="/add_items" method="POST">
+               <select name="select_items">
+                {% for item in all_items %}
+                <option value="{{ item }}">{{ item }}</option>
+                <br>
+                {% endfor %}
+                <br>
+                <input type="submit" value="Add Item" id="add_btn">
+               </select> 
+            </form>
+        </div>
+    </body>
+</html>
